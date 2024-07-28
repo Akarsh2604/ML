@@ -1,1 +1,106 @@
+#q1 odd number
+list = [2,7,4,1,3,6]
+length = 0
+for x in list:
+        length +=1
+def pair_counter():
+    count_of_pairs = 0
+    for i in range(length):
+        for j in range(i):
+            if list[i] + list[j] == 10:
+                count_of_pairs +=1
+    return count_of_pairs
 
+count = pair_counter()
+print(count)
+
+#q2 odd number
+length = int(input("Enter number of elements: "))
+def range_calculator():
+    if length < 3:
+        return "Range determination not possible"
+    else:
+        listt = [None] * length
+        print("Enter the elements:")
+        for i in range(length):
+            num = float(input())
+            listt[i] = num
+        
+        minn = listt[0]
+        maxx = listt[0]
+    
+        for i in range(1, length):
+            if listt[i] < minn:
+                minn = listt[i]
+            if listt[i] > maxx:
+                maxx = listt[i]
+        rangee = maxx - minn
+        return rangee
+
+answer = range_calculator()
+print("Range is:",answer)
+
+#q3 odd number
+def mat_multiplier(mata, matb):
+    size = len(mata)
+    mul = [[0] * size for x in range(size)]
+
+    for i in range(size):
+        for j in range(size):
+            for k in range(size):
+                mul[i][j] += mata[i][k] * matb[k][j]
+    return mul
+
+
+def power_calculator(mat, x):
+    size = len(mat)
+    res = [[1 if i == j else 0 for j in range(size)] for i in range(size)]
+    temp = mat
+    while x > 0:
+        if x % 2 == 1:
+            res = mat_multiplier(res, temp)
+        temp = mat_multiplier(temp, temp)
+        x //= 2
+    return res
+
+n = int(input("Enter order of matrix: "))
+mat = []
+
+for i in range(n):
+    row = []
+    for j in range(n):
+        ele = float(input(f"Enter element [{i}][{j}]: "))
+        row.append(ele)
+    mat.append(row)
+
+x = int(input("Enter power of matrix: "))
+res = power_calculator(mat, x)
+
+for row in res:
+    print(row)
+
+#q4 highest occurring character
+def char_counter(charlist):
+    char_count = {}
+    for l in charlist:
+        if l in char_count:
+            char_count[l] += 1
+        else:
+            char_count[l] = 1
+
+    max_letter = None
+    max_number = 0
+    for l in char_count:
+        if char_count[l] > max_number:
+            max_number = char_count[l]
+            max_letter = l
+    return max_letter, max_number
+
+charlist = input("Enter a word: ")
+char, count = char_counter(charlist)
+
+print("Highest occurring letter is", char, "and it occurred", count, "times.")
+
+
+          
+  
